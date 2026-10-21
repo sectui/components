@@ -1,0 +1,81 @@
+{
+  "name": "@sectui/components",
+  "version": "0.1.0",
+  "description": "Shared config, theme, focus, keymap and widgets for sectui terminal tools (OpenTUI + React)",
+  "license": "MIT",
+  "author": "Hadi",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sectui/components.git"
+  },
+  "homepage": "https://github.com/sectui/components#readme",
+  "bugs": {
+    "url": "https://github.com/sectui/components/issues"
+  },
+  "keywords": [
+    "tui",
+    "terminal",
+    "opentui",
+    "react",
+    "config",
+    "keymap"
+  ],
+  "type": "module",
+  "engines": {
+    "node": ">=26.4.0"
+  },
+  "exports": {
+    ".": {
+      "source": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./config": {
+      "source": "./src/config/index.ts",
+      "types": "./dist/config/index.d.ts",
+      "default": "./dist/config/index.js"
+    },
+    "./config.default.yaml": "./config.default.yaml"
+  },
+  "files": [
+    "dist",
+    "!dist/demo.js",
+    "!dist/spike.js",
+    "src",
+    "config.default.yaml",
+    "!src/**/*.test.ts",
+    "!dist/**/*.test.*"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "build:demo": "esbuild examples/demo.tsx --bundle --platform=node --format=esm --packages=external --loader:.yaml=text --outfile=dist/demo.js",
+    "demo": "npm run build:demo && node --experimental-ffi dist/demo.js",
+    "spike": "esbuild examples/spike-keymap.tsx --bundle --platform=node --format=esm --packages=external --outfile=dist/spike.js && node --experimental-ffi dist/spike.js",
+    "test": "node --conditions=source --test 'src/**/*.test.ts'",
+    "typecheck": "tsc",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "prepack": "npm run build"
+  },
+  "dependencies": {
+    "valibot": "^1.5.0",
+    "yaml": "^2.9.1"
+  },
+  "peerDependencies": {
+    "@opentui/core": "^0.6.6",
+    "@opentui/keymap": "^0.6.6",
+    "@opentui/react": "^0.6.6",
+    "react": "^19.2.0"
+  },
+  "devDependencies": {
+    "@opentui/core": "0.6.6",
+    "@opentui/keymap": "0.6.6",
+    "@opentui/react": "0.6.6",
+    "@types/node": "^24.0.0",
+    "@types/react": "^19.2.0",
+    "esbuild": "^0.28.0",
+    "prettier": "3.8.3",
+    "react": "^19.2.0",
+    "typescript": "^5.9.0"
+  }
+}

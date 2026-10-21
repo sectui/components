@@ -1,0 +1,4 @@
+dist/
+package-lock.json
+# Hand-aligned YAML comments in the examples.
+README.md

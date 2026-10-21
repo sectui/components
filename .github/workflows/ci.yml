@@ -1,0 +1,33 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        # Oldest supported version (see "engines" in package.json) and latest.
+        node-version: ["26.4", latest]
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v7
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: npm
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm test
+      - run: npm run format:check
+      - run: npm run build
+      # Without the "source" condition, the self-import resolves to dist/, as in a tool's node_modules.
+      - name: Smoke test the built package
+        run: |
+          node --input-type=module -e '
+            const m = await import("@sectui/components");
+            if (m.sectuiDefaultsLayer().data.borderStyle === undefined) throw new Error("no defaults");
+            await import("@sectui/components/config");
+          '

@@ -1,0 +1,95 @@
+# sectui shared defaults: look and shortcuts common to every sectui tool.
+#
+# Do not copy this file: put only the values you want to change in
+# ~/.config/sectui/config.yaml. A tool's own config (and a project config,
+# when the tool has projects) can override these keys too. Later wins:
+#
+#   this file < ~/.config/sectui/config.yaml < tool config < project config < CLI
+#
+# Objects are merged key by key. Lists are replaced. Unknown keys are an error.
+
+# Border of panes and popups: single | double | rounded | heavy
+borderStyle: rounded
+
+# Tell tools they may draw Nerd Font glyphs / emoji. Off by default: a tool
+# cannot detect which fonts your terminal renders.
+nerdFonts: true
+emoji: true
+
+# Rounded ends on badges (pills), drawn with Nerd Font half circles. false:
+# square ends. Needs nerdFonts; badges keep the same width either way.
+roundedBadges: true
+
+# A more airy layout: an empty line below the navbar, and one above the help bar.
+spacious: true
+
+# The bottom bar with the short help. Hidden: "?" still opens the full help
+# (and the empty line "spacious" adds above it goes away too).
+helpBar: true
+
+# No background color for the app: the terminal's own background (or its
+# transparency) shows through. The bars and popups keep theirs.
+transparentBackground: false
+
+# base24 palette (https://github.com/tinted-theming/home). Default: Catppuccin
+# Mocha. Tools use semantic roles derived from it (bg, fg, accent, error…) and
+# can also read any baseXX directly.
+colors:
+  base00: "#110F12" # default background
+  base01: "#181825" # lighter background (status bars)
+  base02: "#313244" # selection background
+  base03: "#45475a" # comments, muted text, borders
+  base04: "#585b70" # dark foreground (status bars)
+  base05: "#cdd6f4" # default foreground
+  base06: "#f5e0dc" # light foreground
+  base07: "#b4befe" # light background
+  base08: "#f38ba8" # red
+  base09: "#fab387" # orange
+  base0A: "#f9e2af" # yellow
+  base0B: "#a6e3a1" # green
+  base0C: "#94e2d5" # cyan
+  base0D: "#89b4fa" # blue
+  base0E: "#cba6f7" # magenta
+  base0F: "#f2cdcd" # brown
+  base10: "#181825" # darker background
+  base11: "#11111b" # darkest background
+  base12: "#eba0ac" # bright red
+  base13: "#f5e0dc" # bright yellow
+  base14: "#a6e3a1" # bright green
+  base15: "#89dceb" # bright cyan
+  base16: "#74c7ec" # bright blue
+  base17: "#f5c2e7" # bright magenta
+
+# Shortcuts of the commands shared by every tool, by command name. A value is
+# one key or a list of keys; an empty list removes the shortcut. Single-letter
+# keys are ignored while a text field has focus.
+keys:
+  app.quit: [q, ctrl+c]
+  app.palette: ctrl+p
+  app.help: "?"
+  app.close: escape
+
+  tab.next: "]"
+  tab.previous: "["
+
+  # ctrl+h and ctrl+j need the Kitty keyboard protocol (Ghostty, kitty,
+  # WezTerm, foot…). The alt+ variants work in every terminal.
+  pane.left: [ctrl+h, alt+h]
+  pane.down: [ctrl+j, alt+j]
+  pane.up: [ctrl+k, alt+k]
+  pane.right: [ctrl+l, alt+l]
+  pane.next: tab
+  pane.previous: shift+tab
+
+  # Text areas: open the text in $VISUAL / $EDITOR (from the field or its pane).
+  editor.external: ctrl+e
+
+  # Inside the command palette (j / k would type in its input).
+  palette.up: [up, ctrl+k]
+  palette.down: [down, ctrl+j]
+
+  # Scrollable views without a text field (the help).
+  scroll.up: [k, up, ctrl+k]
+  scroll.down: [j, down, ctrl+j]
+  scroll.page-up: pageup
+  scroll.page-down: pagedown
