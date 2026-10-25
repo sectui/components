@@ -30,7 +30,8 @@ export function useHints(): Hint[] {
     const title = key.commandAttrs?.title;
     if (!name || typeof title !== "string") continue;
     const hint = byCommand.get(name) ?? { name, title, keys: [], short: key.commandAttrs?.hint === true };
-    hint.keys.push(key.display);
+    // A command registered by several layers may come back with the same key more than once.
+    if (!hint.keys.includes(key.display)) hint.keys.push(key.display);
     byCommand.set(name, hint);
   }
   return [...byCommand.values()].sort((a, b) => rank(a.name) - rank(b.name)); // stable: keeps keymap order within a rank

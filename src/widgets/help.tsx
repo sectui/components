@@ -2,6 +2,7 @@ import type { Renderable, ScrollBoxRenderable } from "@opentui/core";
 import { useEffect, useRef } from "react";
 import { useSectui } from "../context.ts";
 import { useCommands } from "../keymap/commands.ts";
+import { bindingKeys } from "./binding-keys.ts";
 
 interface Row {
   name: string;
@@ -32,7 +33,7 @@ export function Help({ previous, onUnmount }: { previous: Renderable | null; onU
     .map((e) => ({
       name: e.command.name,
       title: (e.command as unknown as { title: string }).title,
-      keys: e.bindings.map((b) => b.sequence.map((s) => s.display).join("")).join(", "),
+      keys: bindingKeys(e.bindings).join(", "),
     }))
     .sort((a, b) => rank(a.name) - rank(b.name));
 

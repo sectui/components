@@ -3,6 +3,7 @@ import { useTerminalDimensions } from "@opentui/react";
 import { useMemo, useState } from "react";
 import { useSectui } from "../context.ts";
 import { useCommands } from "../keymap/commands.ts";
+import { bindingKeys } from "./binding-keys.ts";
 
 interface Entry {
   name: string;
@@ -37,7 +38,7 @@ export function CommandPalette({
       .map((e) => ({
         name: e.command.name,
         title: String((e.command as { title?: unknown }).title ?? ""),
-        keys: e.bindings.map((b) => b.sequence.map((s) => s.display).join("")).join("/"),
+        keys: bindingKeys(e.bindings).join("/"),
       }))
       .filter((e) => e.title && !e.name.startsWith("palette.") && e.name !== "app.palette")
       .filter((e) => !q || e.title.toLowerCase().includes(q) || e.name.includes(q));
