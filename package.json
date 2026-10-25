@@ -1,6 +1,6 @@
 {
   "name": "@sectui/components",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "description": "Shared config, theme, focus, keymap and widgets for sectui terminal tools (OpenTUI + React)",
   "license": "MIT",
   "author": "Hadi",
