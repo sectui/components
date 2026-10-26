@@ -25,7 +25,7 @@ Shared building blocks for sectui terminal tools ([OpenTUI](https://github.com/a
   await startApp(config, <App />, { notifications })
   ```
 
-- **Popups** (`useSectui().modal.open()`): everything behind is dimmed (a semi-transparent layer: colors blend, text stays readable); `escape` or a click outside closes them, and that click reaches nothing behind. Long content belongs in a `<scrollbox>`: scrollbar, mouse wheel, and the `scroll.up` / `scroll.down` (`j` / `k`, arrows) / `scroll.page-up` / `scroll.page-down` keys in the help.
+- **Popups** (`useSectui().modal.open()`): everything behind is dimmed (a semi-transparent layer: colors blend, text stays readable); `escape` or a click outside closes them, and that click reaches nothing behind. Long content belongs in a `<scrollbox>`: scrollbar, mouse wheel, and the `scroll.up` / `scroll.down` (`j` / `k`, arrows) / `scroll.page-up` / `scroll.page-down` keys in the help. A fixed `width` / `height` is kept while it fits and shrinks with a smaller terminal (back to it when the terminal grows); what does not fit is cut at the border. So that the rows that matter stay visible in a small frame: `flexShrink: 0` on them (a button row), `flexGrow: 1, flexBasis: 0` on the part that can give up room (a list in a `<scrollbox>`).
 
 Nothing here is specific to one tool.
 
@@ -119,7 +119,7 @@ npm run demo         # interactive demo of everything above
 npm run spike        # headless checks of the @opentui/keymap behaviours this package relies on
 ```
 
-The package ships compiled JavaScript in `dist/`. Its TypeScript sources are exported under the `source` condition, which a sibling tool linked with `file:../components` uses for its tests and its bundle (`node --conditions=source`, esbuild `--conditions=source`). Releases: a `v*` tag runs `.github/workflows/release.yml` (checks, `npm pack`, attestation, npm publish, GitHub release).
+The package ships compiled JavaScript in `dist/`, which is what tools use. The TypeScript sources are exported only under the `sectui-source` condition, for this repository's own tests and typecheck (`node --conditions=sectui-source`, `customConditions` in `tsconfig.json`): a tool that enables the common `source` condition no longer gets the raw `.tsx`, which its own JSX settings would compile wrongly. Releases: a `v*` tag runs `.github/workflows/release.yml` (checks, `npm pack`, attestation, npm publish, GitHub release).
 
 `scripts/drive-demo.sh` drives the demo in a detached tmux and prints a screen capture after each step (`npm run build:demo` first).
 

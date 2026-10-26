@@ -23,7 +23,7 @@ jobs:
       - run: npm test
       - run: npm run format:check
       - run: npm run build
-      # Without the "source" condition, the self-import resolves to dist/, as in a tool's node_modules.
+      # Without the "sectui-source" condition, the self-import resolves to dist/, as in a tool's node_modules.
       - name: Smoke test the built package
         run: |
           node --input-type=module -e '

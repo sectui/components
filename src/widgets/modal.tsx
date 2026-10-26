@@ -95,7 +95,11 @@ function ModalFrame({ entry, depth, close }: { entry: ModalEntry; depth: number;
         title={entry.options.title ? ` ${entry.options.title} ` : undefined}
         width={entry.options.width ?? "60%"}
         height={entry.options.height ?? "60%"}
-        style={{ flexDirection: "column" }}
+        // The layer above is the whole screen: a fixed size shrinks with a smaller terminal, live.
+        maxWidth="100%"
+        maxHeight="100%"
+        // Children never draw over the border when the frame is smaller than its content.
+        style={{ flexDirection: "column", overflow: "hidden" }}
         onMouseDown={(e: MouseEvent) => {
           e.stopPropagation();
           // A click that closed the popup (a button): no focus on the click's target after it, the

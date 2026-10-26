@@ -1,6 +1,6 @@
 {
   "name": "@sectui/components",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Shared config, theme, focus, keymap and widgets for sectui terminal tools (OpenTUI + React)",
   "license": "MIT",
   "author": "Hadi",
@@ -26,12 +26,12 @@
   },
   "exports": {
     ".": {
-      "source": "./src/index.ts",
+      "sectui-source": "./src/index.ts",
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
     },
     "./config": {
-      "source": "./src/config/index.ts",
+      "sectui-source": "./src/config/index.ts",
       "types": "./dist/config/index.d.ts",
       "default": "./dist/config/index.js"
     },
@@ -51,7 +51,7 @@
     "build:demo": "esbuild examples/demo.tsx --bundle --platform=node --format=esm --packages=external --loader:.yaml=text --outfile=dist/demo.js",
     "demo": "npm run build:demo && node --experimental-ffi dist/demo.js",
     "spike": "esbuild examples/spike-keymap.tsx --bundle --platform=node --format=esm --packages=external --outfile=dist/spike.js && node --experimental-ffi dist/spike.js",
-    "test": "node --conditions=source --test 'src/**/*.test.ts'",
+    "test": "node --conditions=sectui-source --test 'src/**/*.test.ts'",
     "typecheck": "tsc",
     "format": "prettier --write .",
     "format:check": "prettier --check .",

@@ -7,8 +7,8 @@
     "jsx": "react-jsx",
     "jsxImportSource": "@opentui/react",
     "types": ["node"],
-    // "@sectui/components/..." self-imports resolve to src/ (see "source" in package.json exports).
-    "customConditions": ["source"],
+    // "@sectui/components/..." self-imports resolve to src/ (see "sectui-source" in package.json exports).
+    "customConditions": ["sectui-source"],
 
     // Sources import each other with .ts / .tsx extensions, so Node runs the tests as is
     // and tsc rewrites them to .js when building dist/.
